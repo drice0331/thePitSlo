@@ -46,7 +46,7 @@
     
      NSString *docTitle = [NSString stringWithFormat:@"%@",[[doclink titleLabel] text]];
      
-     NSLog(docTitle);
+     //NSLog(docTitle);
          
      DocumentDetailViewController *ddvc = [segue destinationViewController];
      ddvc.docName = docTitle;

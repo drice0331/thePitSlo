@@ -7,8 +7,9 @@
 //
 
 #import "ScheduleViewController.h"
+//#import "ScheduledClassEvent.m"
 
-@interface ScheduleViewController () <EKEventEditViewDelegate>
+@interface ScheduleViewController () <EKEventEditViewDelegate, UIScrollViewDelegate>
 
 // EKEventStore instance associated with the current Calendar application
 @property (nonatomic, strong) EKEventStore *eventStore;
@@ -24,7 +25,9 @@
 @implementation ScheduleViewController
 
 @synthesize fkMon10;
+@synthesize pjMon11;
 @synthesize wres;
+@synthesize openMon3;
 //@synthesize tap;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -41,25 +44,71 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    //CGRect fullScreenRect=[[UIScreen mainScreen] applicationFrame];
+    //self.scrollView = [[UIScrollView alloc] initWithFrame:fullScreenRect];
+    [self.scrollView addSubview:self.container];
+    self.scrollView.minimumZoomScale=1.0;
+    self.scrollView.maximumZoomScale=4.0;
+    //self.scrollView.contentSize=CGSizeMake(320, 758);
+    self.scrollView.delegate=self;
+    self.scrollView.contentSize = self.container.bounds.size;
+    self.scrollView.scrollEnabled = true;
+    //self.scrollView.contentInset=UIEdgeInsetsMake(64.0,0.0,44.0,0.0);
+    //self.scrollView.contentSize = CGSizeMake(2480, 1960);
+    
+    //UIScrollView* sc = (UIScrollView*)self.scrollView;
+    //sc.contentSize = sc.bounds.size;
+    /*
+    UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinchGesture:)];
+    [self.view addGestureRecognizer:pinchGesture];
+    */
+
+    
     // Initialize the event store
 	self.eventStore = [[EKEventStore alloc] init];
     // Initialize the events list
 	self.eventsList = [[NSMutableArray alloc] initWithCapacity:0];
     
+    
+    
     [fkMon10 setClassEventName:@"Fitness Kickboxing"];
-    [fkMon10 setStartTime:10];
-    [fkMon10 setEndTime:11];
-    [fkMon10 setDayOfTheWeek:1];
+    [fkMon10 setStartHour:10];
+    [fkMon10 setStartMinute:0];
+    [fkMon10 setEndHour:11];
+    [fkMon10 setEndMinute:0];
+    [fkMon10 setDayOfTheWeek:2];
+    [fkMon10 setFillColor:[UIColor redColor]];
+    
+    [pjMon11 setClassEventName:@"Pit Jitsu"];
+    [pjMon11 setStartHour:11];
+    [pjMon11 setStartMinute:0];
+    [pjMon11 setEndHour:12];
+    [pjMon11 setEndMinute:0];
+    [pjMon11 setDayOfTheWeek:2];
+    [pjMon11 setFillColor:[UIColor redColor]];
+    
+    [openMon3 setClassEventName:@"Open Training"];
+    [openMon3 setStartHour:15];
+    [openMon3 setStartMinute:0];
+    [openMon3 setEndHour:15];
+    [openMon3 setEndMinute:30];
+    [openMon3 setDayOfTheWeek:2];
+    [openMon3 setFillColor:[UIColor redColor]];
     
     [wres setClassEventName:@"Wrestling"];
-    [wres setStartTime:10];
-    [wres setEndTime:11];
-    [wres setDayOfTheWeek:1];
+    [wres setStartHour:11];
+    [wres setStartMinute:0];
+    [wres setEndHour:12];
+    [wres setEndMinute:0];
+    [wres setDayOfTheWeek:4];
+    [wres setFillColor:[UIColor blackColor]];
+
+    
     
     fkMon10.userInteractionEnabled = true;
     wres.userInteractionEnabled = true;
     
-    NSArray *events = [[NSArray alloc] initWithObjects:fkMon10, wres, nil];
+    NSArray *events = [[NSArray alloc] initWithObjects:fkMon10, pjMon11, nil];
     
     for(ScheduledClassEvent *e in events)
     {
@@ -72,6 +121,8 @@
         //[tap setNumberOfTouchesRequired:1];
     [e addGestureRecognizer:tap];
     }
+    
+    
         
 }
 
@@ -80,6 +131,15 @@
     [super viewDidAppear:animated];
     // Check whether we are authorized to access Calendar
     [self checkEventStoreAccessForCalendar];
+    //self.scrollView.contentSize = self.container.bounds.size;
+    //self.scrollView.scrollEnabled = true;
+    [self resetImageZoom];
+}
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [self resetImageZoom];
 }
 
 - (void)didReceiveMemoryWarning
@@ -109,8 +169,53 @@
     
         EKEvent *e = [EKEvent eventWithEventStore:_eventStore];
         e.title = [sce classEventName];
+        //e.startDate =
+        //e.endDate =
+        //NSDate *today = [NSDate date];
+         //NSDateComponents *d =  [NSDateComponents init];
+        //[d setHour:[sce startTime]];
+        //[d setWeekday:[sce dayOfTheWeek]];
+        // NSDateComponents to NSDate
+        
+        NSDate *today = [NSDate date];
+        NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        [gregorian setLocale:[NSLocale currentLocale]];
+        
+        NSDateComponents *nowComponents = [gregorian components:NSYearCalendarUnit | NSWeekCalendarUnit | NSWeekdayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit fromDate:today];
+        NSDateComponents *eventComponents = [gregorian components:NSYearCalendarUnit | NSWeekCalendarUnit | NSWeekdayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit fromDate:today];
+        
+        NSLog(@"Todays weekday - %ld", (long)[nowComponents weekday]);
+        
+        
+        [eventComponents setWeekday:[sce dayOfTheWeek]];
+        [eventComponents setHour:[sce startHour]];
+        [eventComponents setMinute:[sce startMinute]];
+        [eventComponents setSecond:0];
+        NSLog(@"Event weekday - %ld", (long)[eventComponents weekday]);
+
+        
+        if([nowComponents weekday]  >= [eventComponents weekday])
+        {
+            if([nowComponents hour] >= [eventComponents hour])
+            {
+                [eventComponents setWeek:([eventComponents week] + 1)];
+            }
+        }
         
 
+        
+        NSDate *beginningOfWeek = [gregorian dateFromComponents:eventComponents];
+        
+        NSLog(@"nowcomponents weekday - %lu", (long)[nowComponents weekday]);
+
+        e.startDate = beginningOfWeek;
+        
+        [eventComponents setHour:[sce endHour]];
+        [eventComponents setMinute:[sce endMinute]];
+        NSDate *endOfWeek = [gregorian dateFromComponents:eventComponents];
+        e.endDate = endOfWeek;
+        e.location = @"The Pit SLO";
+        
     addController.eventStore = self.eventStore;
         addController.event = e;
         
@@ -119,8 +224,12 @@
     
     [self presentViewController:addController animated:YES completion:nil];
     }];
+    //[self resetImageZoom];
     //[self performSegueWithIdentifier:@"calenderDetailSegue" sender:sce];
+         
+         
 }
+
 
 - (IBAction)addClassToCalender:(id)sender
 {
@@ -147,92 +256,7 @@
          [self presentViewController:addController animated:YES completion:nil];
      }];
     
-    /*
-    EKEventStore *eventStore = [[EKEventStore alloc] init];
-    if ([eventStore respondsToSelector:@selector(requestAccessToEntityType:completion:)])
-    {
-        // the selector is available, so we must be on iOS 6 or newer
-        [eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
-            dispatch_async(dispatch_get_main_queue(), ^{// not sure if this line needed
-                if (error)
-                {
-                    // display error message here
-                }
-                else if (!granted)
-                {
-                    // display access denied error message here
-                }
-                else
-                {
-                    //access granted
-                    
-                    // ***** do the important stuff here *****
-                    EKEvent *event = [EKEvent eventWithEventStore:eventStore];
-                    EKRecurrenceDayOfWeek *eventDayOfWeek = [EKRecurrenceDayOfWeek dayOfWeek:1];
-                    NSArray *daysOfTheWeek = [[NSArray alloc] initWithObjects:eventDayOfWeek, nil];//
-                    
-                    
-                    //one year from now
-                    NSTimeInterval NSOneMonth = 30 * 24 * 60 * 60;
-                    NSDateComponents *dateComps = [[NSDateComponents alloc]init];
-                    
-                    NSInteger dummyhour = 12;
-                    NSInteger dummyMonth = 1;
-                    NSInteger dummyYear = 2014;
-                    NSInteger dummyDay = 5;
-                    
-                    [dateComps setYear:dummyYear];
-                    [dateComps setDay:dummyDay];
-                    [dateComps setMonth:dummyMonth];
-                    [dateComps setHour:dummyhour];
-                    
-                    NSDate *oneMonthFromNow = [[[NSDate alloc]init] dateByAddingTimeInterval:NSOneMonth];
-                    //Create an Event Kit date from this date
-                    EKRecurrenceEnd *recurringEnd = [EKRecurrenceEnd recurrenceEndWithEndDate:oneMonthFromNow];
-                    
-                    EKRecurrenceRule *rule = [[EKRecurrenceRule alloc] initRecurrenceWithFrequency:EKRecurrenceFrequencyWeekly interval:1 daysOfTheWeek:daysOfTheWeek daysOfTheMonth:nil monthsOfTheYear:nil weeksOfTheYear:nil daysOfTheYear:nil setPositions:nil end:recurringEnd];//
-                    
-                    [event setRecurrenceRules:[[NSArray alloc] initWithObjects:rule, nil]];
-                    
-                    NSDateComponents *comps;
-                    [comps setHour:12];
-                    [comps setMinute:0];
-                    NSDate *eventStartDate;
-                    
-                    //NSDate *start = [[NSCalendar alloc] dateByAddingComponents:comps toDate:<#(NSDate *)#> options:<#(NSCalendarOptions)#>];
-                    
-                    event.title = @"Event Title";
-                    event.startDate = [NSDate date]; //today
-                    event.endDate = [event.startDate dateByAddingTimeInterval:60*60];  //set 1 hour meeting
-                    [event setCalendar:[eventStore defaultCalendarForNewEvents]];
-                    NSError *err = nil;
-                    [eventStore saveEvent:event span:EKSpanThisEvent commit:YES error:&err];
-                    //NSString *savedEventId = event.eventIdentifier;  //this is so you can access this event later
-                    
-                    NSError *saveError = nil;
-                    //Save the event
-                    if ([eventStore saveEvent:event
-                                         span:EKSpanFutureEvents
-                                        error:&saveError])
-                    {
-                        NSLog(@"Successfully created the recurring event.");
-                    }
-                    else
-                    {
-                        NSLog(@"Failed to create the recurring event %@", saveError);
-                    }
-                    
-                }
-            });
-        }];
-    }
-    else
-    {
-        // this code runs in iOS 4 or iOS 5
-        // ***** do the important stuff here *****
-    }
-    
-    */
+
     
 }
 
@@ -337,7 +361,7 @@
 		  didCompleteWithAction:(EKEventEditViewAction)action
 {
     NSLog(@"eventEditViewController - in");
-    ScheduleViewController * __weak weakSelf = self;
+    //ScheduleViewController * __weak weakSelf = self;
 	// Dismiss the modal view controller
     [self dismissViewControllerAnimated:YES completion:^
      {
@@ -360,10 +384,128 @@
     return self.defaultCalendar;
 }
 
-- (void) createRecurringEventInLocalCalendar{
+-(UIView *) viewForZoomingInScrollView:(UIScrollView *)scrollView
+{
     
+    
+    return self.container;
+}
+
+- (void) resetImageZoom {
+    
+    // animate the transition
+    /*
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationDidStopSelector:@selector(resetAnimFinish:finished:context:)];
+    [UIView setAnimationDuration:0.4];
+    
+    // reset the scrollview and the current image view
+    self.scrollView.transform = CGAffineTransformIdentity;
+    self.scrollView.contentOffset = CGPointZero;
+    self.container.frame = self.scrollView.frame;
+    self.container.center = self.scrollView.center;
+    self.scrollView.contentSize = self.container.frame.size;
+    */
+    //[UIView beginAnimations:nil context:nil];
+    //[UIView setAnimationDuration:2];
+    self.scrollView.zoomScale = 1.0;
+    [UIView commitAnimations];
     
 }
 
+-(void)resetAnimFinish:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
+    
+    // make a copy of the image view
+    UIView *copy = [[UIView alloc] initWithFrame:self.container.frame];
+    copy.autoresizingMask = self.container.autoresizingMask;
+    copy.contentMode = self.container.contentMode;
+    copy.frame = self.container.frame;
+    copy.center = self.container.center;
+    
+    // replace the current image view with our copy
+    [self.container removeFromSuperview];
+    self.container = copy;
+    [self.scrollView addSubview:copy];
+}
 
+
+- (IBAction)eventTap:(id)sender
+{
+    ScheduledClassEvent *sce = sender;
+    //if([gestureRecognizer.view isKindOfClass:[ScheduledClassEvent class]])
+    //  {
+    //sce = gestureRecognizer.view;
+    //}
+    
+    
+    [self.eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error)
+     {
+         
+         NSLog(@"access granted");
+         EKEventEditViewController *addController = [[EKEventEditViewController alloc] init];
+         
+         EKEvent *e = [EKEvent eventWithEventStore:_eventStore];
+         e.title = [sce classEventName];
+         //e.startDate =
+         //e.endDate =
+         //NSDate *today = [NSDate date];
+         //NSDateComponents *d =  [NSDateComponents init];
+         //[d setHour:[sce startTime]];
+         //[d setWeekday:[sce dayOfTheWeek]];
+         // NSDateComponents to NSDate
+         
+         NSDate *today = [NSDate date];
+         NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+         [gregorian setLocale:[NSLocale currentLocale]];
+         
+         NSDateComponents *nowComponents = [gregorian components:NSYearCalendarUnit | NSWeekCalendarUnit | NSWeekdayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit fromDate:today];
+         NSDateComponents *eventComponents = [gregorian components:NSYearCalendarUnit | NSWeekCalendarUnit | NSWeekdayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit fromDate:today];
+         
+         NSLog(@"Todays weekday - %ld", (long)[nowComponents weekday]);
+         
+         
+         [eventComponents setWeekday:[sce dayOfTheWeek]];
+         [eventComponents setHour:[sce startHour]];
+         [eventComponents setMinute:[sce startMinute]];
+         [eventComponents setSecond:0];
+         NSLog(@"Event weekday - %ld", (long)[eventComponents weekday]);
+         
+         
+         if([nowComponents weekday]  >= [eventComponents weekday])
+         {
+             if([nowComponents hour] >= [eventComponents hour])
+             {
+                 [eventComponents setWeek:([eventComponents week] + 1)];
+             }
+         }
+         
+         
+         
+         NSDate *beginningOfWeek = [gregorian dateFromComponents:eventComponents];
+         
+         NSLog(@"nowcomponents weekday - %lu", (long)[nowComponents weekday]);
+         
+         e.startDate = beginningOfWeek;
+         
+         [eventComponents setHour:[sce endHour]];
+         [eventComponents setMinute:[sce endMinute]];
+         NSDate *endOfWeek = [gregorian dateFromComponents:eventComponents];
+         e.endDate = endOfWeek;
+         e.location = @"The Pit SLO";
+         
+         addController.eventStore = self.eventStore;
+         addController.event = e;
+         
+         addController.editViewDelegate = self;
+         
+         
+         [self presentViewController:addController animated:YES completion:nil];
+     }];
+    //[self resetImageZoom];
+    //[self performSegueWithIdentifier:@"calenderDetailSegue" sender:sce];
+    
+    
+
+}
 @end

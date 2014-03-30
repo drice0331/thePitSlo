@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <EventKit/EventKit.h>
+#import <EventKitUI/EventKitUI.h>
+#import "ScheduledClassEvent.h"
 
 @interface ScheduleViewContainer : UIViewController
+@property (weak, nonatomic) IBOutlet ScheduledClassEvent *fkMon10;
 
 @end

@@ -21,6 +21,8 @@
 
 @end
 
+
+
 @implementation BlogViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -40,6 +42,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
 	// Do any additional setup after loading the view.
     feeds = [[NSMutableArray alloc] init];
     NSURL *url = [NSURL URLWithString:@"http://thepitslo.blogspot.com/feeds/posts/default?alt=rss"];
@@ -130,7 +133,7 @@
         //NSString *uri = [feeds[indexPath.row] objectForKey:@"uri"];
         
         NSString *string = [feeds[indexPath.row] objectForKey: @"link"];
-        NSLog(string);
+        //NSLog(string);
         [[segue destinationViewController] setUrl:string];
         
     }

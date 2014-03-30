@@ -10,17 +10,18 @@
 #import <EventKit/EventKit.h>
 #import <EventKitUI/EventKitUI.h>
 
-@interface ScheduledClassEvent : UIView
+@interface ScheduledClassEvent : UIButton
 
 @property (nonatomic, strong) NSString* classEventName;
+@property (nonatomic, strong) UIColor* fillColor;
 @property (nonatomic) NSUInteger dayOfTheWeek;
-@property (nonatomic) NSUInteger startTime;
-@property (nonatomic) NSUInteger endTime;
+@property (nonatomic) NSUInteger startHour;
+@property (nonatomic) NSUInteger endHour;
+@property (nonatomic) NSUInteger startMinute;
+@property (nonatomic) NSUInteger endMinute;
 
 @property (nonatomic) BOOL clicked;
 
 @property (nonatomic) UIViewContentMode contentMode;
-
-- (void)tap:(UITapGestureRecognizer *)gesture;
 
 @end

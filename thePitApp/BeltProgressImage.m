@@ -40,6 +40,17 @@ NSDictionary *colors;// = [NSDictionary dictionaryWithObjects:keys forKeys:color
     [self setNeedsDisplay];
 }
 
+- (NSString*) getGroupName
+{
+    return _groupName;
+}
+
+- (void)setGroupName:(NSString *)groupName
+{
+    _groupName = groupName;
+    [self setNeedsDisplay];
+}
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -59,9 +70,37 @@ NSDictionary *colors;// = [NSDictionary dictionaryWithObjects:keys forKeys:color
     //NSAttributedString *text;
     //UIBezierPath *roundedRect = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:CORNER_RADIUS];
     //[roundedRect addClip];
+    /*
+    if([_groupName isEqualToString:@"HKAdults" ])
+    {
+        keys = [NSArray arrayWithObjects:@"White", @"Yellow", @"Orange", @"Purple", @"Blue", @"Blue w/ black",
+                @"Green", @"Green w/ black", @"Red", @"Red w/ black", @"Brown", @"Brown/Black", @"Black", nil];
+        colorImagePaths = [NSArray arrayWithObjects:@"white.jpg", @"yellow.jpg", @"orange.jpg", @"purple.jpg", @"blue.jpg",
+            @"blueblack.jpg", @"green.jpg", @"greenblack.jpg", @"red.jpg", @"redblack.jpg", @"brown.jpg", @"brownblack.jpg", @"black.jpg", nil];
+        
+    }
+    else if([_groupName isEqualToString:@"HKKids" ])
+    {
+        keys = [NSArray arrayWithObjects:@"White", @"Yellow", @"Orange", @"Purple", @"Blue", @"Blue w/ black",
+                @"Green", @"Green w/ white",@"Green w/ black", @"Red", @"Red w/ white", @"Red w/ black", @"Brown",
+                @"Brown w/ white", @"Brown w/ Black", @"Black", nil];
+        colorImagePaths = [NSArray arrayWithObjects:@"white.jpg", @"yellow.jpg", @"orange.jpg", @"purple.jpg", @"blue.jpg",
+                @"blueblack.jpg", @"green.jpg", @"greenwhite.jpg", @"greenblack.jpg", @"red.jpg", @"redwhite.jpg", @"redblack.jpg", @"brown.jpg", @"brownwhite", @"brownwithblack.jpg", @"black.jpg", nil];
+    }
+    else if([_groupName isEqualToString:@"PeeWees"])
+    {
+        keys = [NSArray arrayWithObjects:@"White", @"White w/ Yellow", @"White w/ Orange", @"White w/ Purple",  @"White w/ Blue", @"White w/ Green", @"White w/ Red", @"White w/ Brown", @"White w/ Black", @"White w/ Black x2", @"Yellow", @"Yellow w/ White", @"Yellow w/ Orange", @"Yellow w/ Black", @"Yellow/Orange", @"Yellow/Black", @"Camo", nil];
+        colorImagePaths = [NSArray arrayWithObjects:@"white.jpg", @"whiteyellow.jpg", @"whiteorange.jpg", @"whitepurple.jpg",  @"whiteblue.jpg", @"whitegreen.jpg", @"whitered.jpg", @"whitebrown.jpg", @"whiteblack.jpg", @"whiteblack2.jpg", @"yellow.jpg", @"yellowwhite.jpg", @"yellowwithorange.jpg", @"yellowwithblack.jpg", @"yelloworange.jpg", @"yellowblack.jpg", @"camo.jpg", nil];
+    }
+    else //BJJ
+    {
+        keys = [NSArray arrayWithObjects:@"White", @"Blue", @"Purple", @"Brown", "Black", nil];
+        colorImagePaths = [NSArray arrayWithObjects:@"white.jpg", @"blue.jpg", @"purple.jpg", @"brown.jpg", @"black.jpg", nil];
+    }*/
     
     keys = [NSArray arrayWithObjects:@"Blue", @"Red", nil];
     colorImagePaths = [NSArray arrayWithObjects:@"blue.jpg", @"red.jpg", nil];
+    
     colors = [NSDictionary dictionaryWithObjects:colorImagePaths forKeys:keys];
     
     UIImage *beltImage = [UIImage imageNamed:@"belt_transparent.png"];

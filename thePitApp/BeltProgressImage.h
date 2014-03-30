@@ -14,6 +14,6 @@
 
 @property (nonatomic) NSString *color;
 
-
+@property (nonatomic) NSString *groupName;
 
 @end

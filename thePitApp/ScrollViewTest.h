@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ScrollViewTest : UIViewController
+@interface ScrollViewTest : UIViewController<UIScrollViewDelegate>
+@property (strong, nonatomic) IBOutlet UIScrollView *theScroller;
+@property (strong, nonatomic) IBOutlet UIView *container;
 
 @end

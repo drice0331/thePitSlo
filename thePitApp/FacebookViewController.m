@@ -14,6 +14,9 @@
 
 @implementation FacebookViewController
 
+@synthesize activityIndicatorObject;
+
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -27,7 +30,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    activityIndicatorObject = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    activityIndicatorObject.center = CGPointMake(150, 150);
+    [self.view addSubview:activityIndicatorObject];
+    
     [self loadFacebookWebViewPage];
+    
 	// Do any additional setup after loading the view.
 }
 
@@ -86,6 +94,22 @@
     if ([_fbwebview canGoBack]) {
         [_fbwebview goBack];
     }
+}
+
+- (IBAction)startAnimating:(id)sender
+
+{
+    
+    [activityIndicatorObject startAnimating];
+    
+}
+
+- (IBAction)stopAnimating:(id)sender
+
+{
+    
+    [activityIndicatorObject stopAnimating];
+    
 }
 
 @end

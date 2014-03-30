@@ -38,7 +38,7 @@
 {
     [super viewDidLoad];
     
-    NSLog(_beltType);
+    //NSLog(_beltType);
     self.navigationItem.title = _beltType;
     
     if([_beltType isEqualToString:@"HKAdults"])
@@ -149,15 +149,17 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"showBeltProgressDetail"]) {
         
+        
+        //
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         NSString *gname = [feeds[indexPath.row] objectForKey:@"gsx:name"];
         NSString *gprogress = [feeds[indexPath.row] objectForKey:@"gsx:progress"];
         NSString *gcolor = [feeds[indexPath.row] objectForKey:@"gsx:belt"];
         BeltProgressDetailController *bpdc = [segue destinationViewController];
-        bpdc.beltProgressDetailInfo = [[NSArray alloc] initWithObjects: gname, gprogress, gcolor, nil];
+        bpdc.beltProgressDetailInfo = [[NSArray alloc] initWithObjects: gname, gprogress, gcolor, _beltType, nil];
         
-        NSLog(gcolor);
-        NSLog(@"%u ", bpdc.beltProgressDetailInfo.count);
+        //NSLog(gcolor);
+        NSLog(@"%lu ", (unsigned long)bpdc.beltProgressDetailInfo.count);
         [segue destinationViewController];
     }
 }

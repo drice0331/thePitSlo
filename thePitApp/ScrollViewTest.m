@@ -8,31 +8,35 @@
 
 #import "ScrollViewTest.h"
 
-@interface ScrollViewTest ()
+@interface ScrollViewTest ()<UIScrollViewDelegate>
 
 @end
 
 @implementation ScrollViewTest
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
+    
     [super viewDidLoad];
+    //_theScroller.contentSize = CGSizeMake(2000.0, 3000.0);
+    [self.theScroller addSubview:self.container];
+    self.theScroller.minimumZoomScale = 0.5;
+    self.theScroller.maximumZoomScale = 3.0;
+    self.theScroller.delegate = self;
+    self.theScroller.contentSize = self.container.bounds.size;
     // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning
+
+- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
+}
+
+-(UIView *) viewForZoomingInScrollView:(UIScrollView *)scrollView
+{
+    return self.container;
 }
 
 /*

@@ -10,5 +10,6 @@
 
 @interface FacebookViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIWebView *fbwebview;
+@property (nonatomic,retain) UIActivityIndicatorView *activityIndicatorObject;
 
 @end
