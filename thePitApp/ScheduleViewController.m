@@ -26,8 +26,81 @@
 
 @synthesize fkMon10;
 @synthesize pjMon11;
-@synthesize wres;
+@synthesize mon12;
+@synthesize mon1;
+@synthesize mon2;
 @synthesize openMon3;
+@synthesize openMon330;
+@synthesize kidsMon4;
+@synthesize lev1Mon5;
+@synthesize fkMon6;
+@synthesize mon7;
+@synthesize mon8;
+
+@synthesize fkTues10;
+@synthesize tues11;
+@synthesize tues12;
+@synthesize tues1;
+@synthesize tues2;
+@synthesize openTues3;
+@synthesize openTues330;
+@synthesize lev2Tues4;
+@synthesize grapTues5;
+@synthesize fkTues6;
+@synthesize pjTues7;
+@synthesize tues8;
+
+@synthesize fkWed10;
+@synthesize pjWed11;
+@synthesize wed12;
+@synthesize wed1;
+@synthesize wed2;
+@synthesize wed3;
+@synthesize peeweeWed330;
+@synthesize kidsWed4;
+@synthesize lev1Wed5;
+@synthesize fkWed6;
+@synthesize wresWed7;
+@synthesize wed8;
+
+@synthesize fkThurs10;
+@synthesize thurs11;
+@synthesize thurs12;
+@synthesize thurs1;
+@synthesize thurs2;
+@synthesize openThurs3;
+@synthesize openThurs330;
+@synthesize lev2Thurs4;
+@synthesize grapThurs5;
+@synthesize fkThurs6;
+@synthesize pjThurs7;
+@synthesize thurs8;
+
+@synthesize fkFri10;
+@synthesize pjFri11;
+@synthesize fri12;
+@synthesize fri1;
+@synthesize fri2;
+@synthesize fri3;
+@synthesize peeweeFri330;
+@synthesize kidsFri4;
+@synthesize lev1Fri5;
+@synthesize fkFri6;
+@synthesize adSparFri7;
+@synthesize fri8;
+
+@synthesize sat10;
+@synthesize fkSat11;
+@synthesize pjSat12;
+@synthesize sparSat1;
+@synthesize sat3;
+@synthesize sat330;
+@synthesize sat4;
+@synthesize sat5;
+@synthesize sat6;
+@synthesize sat7;
+@synthesize sat8;
+
 //@synthesize tap;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -70,45 +143,91 @@
 	self.eventsList = [[NSMutableArray alloc] initWithCapacity:0];
     
     
-    
-    [fkMon10 setClassEventName:@"Fitness Kickboxing"];
-    [fkMon10 setStartHour:10];
-    [fkMon10 setStartMinute:0];
-    [fkMon10 setEndHour:11];
-    [fkMon10 setEndMinute:0];
-    [fkMon10 setDayOfTheWeek:2];
-    [fkMon10 setFillColor:[UIColor redColor]];
-    
-    [pjMon11 setClassEventName:@"Pit Jitsu"];
-    [pjMon11 setStartHour:11];
-    [pjMon11 setStartMinute:0];
-    [pjMon11 setEndHour:12];
-    [pjMon11 setEndMinute:0];
-    [pjMon11 setDayOfTheWeek:2];
-    [pjMon11 setFillColor:[UIColor redColor]];
-    
-    [openMon3 setClassEventName:@"Open Training"];
-    [openMon3 setStartHour:15];
-    [openMon3 setStartMinute:0];
-    [openMon3 setEndHour:15];
-    [openMon3 setEndMinute:30];
-    [openMon3 setDayOfTheWeek:2];
-    [openMon3 setFillColor:[UIColor redColor]];
-    
-    [wres setClassEventName:@"Wrestling"];
-    [wres setStartHour:11];
-    [wres setStartMinute:0];
-    [wres setEndHour:12];
-    [wres setEndMinute:0];
-    [wres setDayOfTheWeek:4];
-    [wres setFillColor:[UIColor blackColor]];
-
+    //Monday classes
+    [fkMon10 setWithClassName:@"Fitness Kickboxing" andDayOfTheWeek:2 andStartHour:10 andStartMinute:0 andEndHour:11 andEndMinute:0 andFillColor:[UIColor redColor]];
+    [pjMon11 setWithClassName:@"Pit Jitsu" andDayOfTheWeek:2 andStartHour:11 andStartMinute:0 andEndHour:12 andEndMinute:0 andFillColor:[UIColor redColor]];
+    [mon12 setWithClassName:@"Closed" andDayOfTheWeek:2 andStartHour:12 andStartMinute:0 andEndHour:13 andEndMinute:0 andFillColor:[UIColor redColor]];
+    [mon1 setWithClassName:@"Closed" andDayOfTheWeek:2 andStartHour:13 andStartMinute:0 andEndHour:14 andEndMinute:0 andFillColor:[UIColor redColor]];
+    [mon2 setWithClassName:@"Closed" andDayOfTheWeek:2 andStartHour:14 andStartMinute:0 andEndHour:15 andEndMinute:0 andFillColor:[UIColor redColor]];
+    [openMon3 setWithClassName:@"Open Training" andDayOfTheWeek:2 andStartHour:15 andStartMinute:0 andEndHour:15 andEndMinute:30 andFillColor:[UIColor blackColor]];
+    [openMon330 setWithClassName:@"Open Training" andDayOfTheWeek:2 andStartHour:15 andStartMinute:30 andEndHour:16 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    [kidsMon4 setWithClassName:@"Pit Kids" andDayOfTheWeek:2 andStartHour:16 andStartMinute:0 andEndHour:17 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    [lev1Mon5 setWithClassName:@"Pit Level 1" andDayOfTheWeek:2 andStartHour:17 andStartMinute:0 andEndHour:18 andEndMinute:0 andFillColor:[UIColor redColor]];
+    [fkMon6 setWithClassName:@"Fitness Kickboxing" andDayOfTheWeek:2 andStartHour:18 andStartMinute:0 andEndHour:19 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    [mon7 setWithClassName:@"Closed" andDayOfTheWeek:2 andStartHour:19 andStartMinute:0 andEndHour:20 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    [mon8 setWithClassName:@"Closed" andDayOfTheWeek:2 andStartHour:20 andStartMinute:0 andEndHour:21 andEndMinute:0 andFillColor:[UIColor blackColor]];
     
     
-    fkMon10.userInteractionEnabled = true;
-    wres.userInteractionEnabled = true;
+    //Tuesday classes
+    [fkTues10 setWithClassName:@"Fitness Kickboxing" andDayOfTheWeek:3 andStartHour:10 andStartMinute:0 andEndHour:11 andEndMinute:0 andFillColor:[UIColor redColor]];
+    [tues11 setWithClassName:@"Closed" andDayOfTheWeek:3 andStartHour:11 andStartMinute:0 andEndHour:12 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    [tues12 setWithClassName:@"Closed" andDayOfTheWeek:3 andStartHour:12 andStartMinute:0 andEndHour:13 andEndMinute:0 andFillColor:[UIColor redColor]];
+    [tues1 setWithClassName:@"Closed" andDayOfTheWeek:3 andStartHour:13 andStartMinute:0 andEndHour:14 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    [tues2 setWithClassName:@"Closed" andDayOfTheWeek:3 andStartHour:14 andStartMinute:0 andEndHour:15 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    [openTues3 setWithClassName:@"Open Training" andDayOfTheWeek:3 andStartHour:15 andStartMinute:0 andEndHour:15 andEndMinute:30 andFillColor:[UIColor blackColor]];
+    [openTues330 setWithClassName:@"Open Training" andDayOfTheWeek:3 andStartHour:15 andStartMinute:30 andEndHour:16 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    [lev2Tues4 setWithClassName:@"Pit Level 2" andDayOfTheWeek:3 andStartHour:16 andStartMinute:0 andEndHour:17 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    [grapTues5 setWithClassName:@"Grappling" andDayOfTheWeek:3 andStartHour:17 andStartMinute:0 andEndHour:18 andEndMinute:30 andFillColor:[UIColor redColor]];
+    [fkTues6 setWithClassName:@"Fitness Kickboxing" andDayOfTheWeek:3 andStartHour:18 andStartMinute:0 andEndHour:19 andEndMinute:0 andFillColor:[UIColor redColor]];
+    [pjTues7 setWithClassName:@"Pit Jitsu" andDayOfTheWeek:3 andStartHour:19 andStartMinute:0 andEndHour:20 andEndMinute:0 andFillColor:[UIColor redColor]];
+    [tues8 setWithClassName:@"Closed" andDayOfTheWeek:3 andStartHour:20 andStartMinute:0 andEndHour:21 andEndMinute:0 andFillColor:[UIColor redColor]];
     
-    NSArray *events = [[NSArray alloc] initWithObjects:fkMon10, pjMon11, nil];
+    //Wednesday classes
+    [fkWed10 setWithClassName:@"Fitness Kickboxing" andDayOfTheWeek:4 andStartHour:10 andStartMinute:0 andEndHour:11 andEndMinute:0 andFillColor:[UIColor redColor]];
+    [pjWed11 setWithClassName:@"Pit Jitsu" andDayOfTheWeek:4 andStartHour:11 andStartMinute:0 andEndHour:12 andEndMinute:0 andFillColor:[UIColor redColor]];
+    [wed12 setWithClassName:@"Closed" andDayOfTheWeek:4 andStartHour:12 andStartMinute:0 andEndHour:13 andEndMinute:0 andFillColor:[UIColor redColor]];
+    [wed1 setWithClassName:@"Closed" andDayOfTheWeek:4 andStartHour:13 andStartMinute:0 andEndHour:14 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    [wed2 setWithClassName:@"Closed" andDayOfTheWeek:4 andStartHour:14 andStartMinute:0 andEndHour:15 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    [wed3 setWithClassName:@"Closed" andDayOfTheWeek:4 andStartHour:15 andStartMinute:0 andEndHour:15 andEndMinute:30 andFillColor:[UIColor blackColor]];
+    [peeweeWed330 setWithClassName:@"Pit Peewee's" andDayOfTheWeek:4 andStartHour:15 andStartMinute:30 andEndHour:16 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    [kidsWed4 setWithClassName:@"Pit Kids" andDayOfTheWeek:4 andStartHour:16 andStartMinute:0 andEndHour:17 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    [lev1Wed5 setWithClassName:@"Pit Level 1" andDayOfTheWeek:4 andStartHour:17 andStartMinute:0 andEndHour:18 andEndMinute:0 andFillColor:[UIColor redColor]];
+    [fkWed6 setWithClassName:@"Fitness Kickboxing" andDayOfTheWeek:4 andStartHour:18 andStartMinute:0 andEndHour:19 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    [wresWed7 setWithClassName:@"Wrestling" andDayOfTheWeek:4 andStartHour:19 andStartMinute:0 andEndHour:20 andEndMinute:30 andFillColor:[UIColor blackColor]];
+    [wed8 setWithClassName:@"Closed" andDayOfTheWeek:4 andStartHour:20 andStartMinute:0 andEndHour:21 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    
+    //Thursday classes
+    [fkThurs10 setWithClassName:@"Fitness Kickboxing" andDayOfTheWeek:5 andStartHour:10 andStartMinute:0 andEndHour:11 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    [thurs11 setWithClassName:@"Closed" andDayOfTheWeek:5 andStartHour:11 andStartMinute:0 andEndHour:12 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    [thurs12 setWithClassName:@"Closed" andDayOfTheWeek:5 andStartHour:12 andStartMinute:0 andEndHour:13 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    [thurs1 setWithClassName:@"Closed" andDayOfTheWeek:5 andStartHour:13 andStartMinute:0 andEndHour:14 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    [thurs2 setWithClassName:@"Closed" andDayOfTheWeek:5 andStartHour:14 andStartMinute:0 andEndHour:15 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    [openThurs3 setWithClassName:@"Open Training" andDayOfTheWeek:5 andStartHour:15 andStartMinute:0 andEndHour:15 andEndMinute:30 andFillColor:[UIColor blackColor]];
+    [openThurs330 setWithClassName:@"Open Training" andDayOfTheWeek:5 andStartHour:15 andStartMinute:30 andEndHour:16 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    [lev2Thurs4 setWithClassName:@"Pit Level 2" andDayOfTheWeek:5 andStartHour:16 andStartMinute:0 andEndHour:17 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    [grapThurs5 setWithClassName:@"Grappling" andDayOfTheWeek:5 andStartHour:17 andStartMinute:0 andEndHour:18 andEndMinute:30 andFillColor:[UIColor blackColor]];
+    [fkThurs6 setWithClassName:@"Fitness Kickboxing" andDayOfTheWeek:5 andStartHour:18 andStartMinute:0 andEndHour:19 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    [pjThurs7 setWithClassName:@"Pit Jitsu" andDayOfTheWeek:5 andStartHour:19 andStartMinute:0 andEndHour:20 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    [thurs8 setWithClassName:@"Closed" andDayOfTheWeek:5 andStartHour:20 andStartMinute:0 andEndHour:21 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    
+    //Friday classes
+    [fkFri10 setWithClassName:@"Fitness Kickboxing" andDayOfTheWeek:6 andStartHour:10 andStartMinute:0 andEndHour:11 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    [pjFri11 setWithClassName:@"Pit Jitsu" andDayOfTheWeek:6 andStartHour:11 andStartMinute:0 andEndHour:12 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    [fri12 setWithClassName:@"Closed" andDayOfTheWeek:6 andStartHour:12 andStartMinute:0 andEndHour:13 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    [fri1 setWithClassName:@"Closed" andDayOfTheWeek:6 andStartHour:13 andStartMinute:0 andEndHour:14 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    [fri2 setWithClassName:@"Closed" andDayOfTheWeek:6 andStartHour:14 andStartMinute:0 andEndHour:15 andEndMinute:0 andFillColor:[UIColor redColor]];
+    [fri3 setWithClassName:@"Closed" andDayOfTheWeek:6 andStartHour:15 andStartMinute:0 andEndHour:15 andEndMinute:30 andFillColor:[UIColor redColor]];
+    [peeweeFri330 setWithClassName:@"Pit Peewee's" andDayOfTheWeek:6 andStartHour:15 andStartMinute:30 andEndHour:16 andEndMinute:0 andFillColor:[UIColor redColor]];
+    [kidsFri4 setWithClassName:@"Pit Kids" andDayOfTheWeek:6 andStartHour:16 andStartMinute:0 andEndHour:17 andEndMinute:0 andFillColor:[UIColor redColor]];
+    [lev1Fri5 setWithClassName:@"Pit Level 1" andDayOfTheWeek:6 andStartHour:17 andStartMinute:0 andEndHour:18 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    [fkFri6 setWithClassName:@"Fitness Kickboxing" andDayOfTheWeek:6 andStartHour:18 andStartMinute:0 andEndHour:19 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    [adSparFri7 setWithClassName:@"Adult Sparring" andDayOfTheWeek:6 andStartHour:19 andStartMinute:0 andEndHour:20 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    [fri8 setWithClassName:@"Closed" andDayOfTheWeek:6 andStartHour:20 andStartMinute:0 andEndHour:21 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    
+    //Saturday classes
+    [sat10 setWithClassName:@"Closed" andDayOfTheWeek:7 andStartHour:10 andStartMinute:0 andEndHour:11 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    [fkSat11 setWithClassName:@"Fitness Kickboxing" andDayOfTheWeek:7 andStartHour:11 andStartMinute:0 andEndHour:12 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    [pjSat12 setWithClassName:@"Pit Jitsu" andDayOfTheWeek:7 andStartHour:12 andStartMinute:0 andEndHour:13 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    [sparSat1 setWithClassName:@"Beginning Sparring & Submission Wrestling" andDayOfTheWeek:7 andStartHour:13 andStartMinute:0 andEndHour:15 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    [sat3 setWithClassName:@"Closed" andDayOfTheWeek:7 andStartHour:15 andStartMinute:0 andEndHour:15 andEndMinute:30 andFillColor:[UIColor blackColor]];
+    [sat330 setWithClassName:@"Closed" andDayOfTheWeek:7 andStartHour:15 andStartMinute:30 andEndHour:16 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    [sat4 setWithClassName:@"Closed" andDayOfTheWeek:7 andStartHour:16 andStartMinute:0 andEndHour:17 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    [sat5 setWithClassName:@"Closed" andDayOfTheWeek:7 andStartHour:17 andStartMinute:0 andEndHour:18 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    [sat6 setWithClassName:@"Closed" andDayOfTheWeek:7 andStartHour:18 andStartMinute:0 andEndHour:19 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    [sat7 setWithClassName:@"Closed" andDayOfTheWeek:7 andStartHour:19 andStartMinute:0 andEndHour:20 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    [sat8 setWithClassName:@"Closed" andDayOfTheWeek:7 andStartHour:20 andStartMinute:0 andEndHour:21 andEndMinute:0 andFillColor:[UIColor blackColor]];
+    
+    NSArray *events = [[NSArray alloc] initWithObjects:fkMon10, pjMon11, openMon3, openMon330, kidsMon4, lev1Mon5, fkMon6, fkTues10, openTues3, openTues330, lev2Tues4, grapTues5, fkTues6, pjTues7, fkWed10, pjWed11, peeweeWed330, kidsWed4, lev1Wed5, fkWed6, wresWed7, fkThurs10, openThurs3, openThurs330, lev2Thurs4,grapThurs5, fkThurs6, pjThurs7, fkFri10, pjFri11, peeweeFri330, kidsFri4, lev1Fri5, fkFri6, adSparFri7, fkSat11, pjSat12, sparSat1, nil];
     
     for(ScheduledClassEvent *e in events)
     {
@@ -193,10 +312,19 @@
         [eventComponents setSecond:0];
         NSLog(@"Event weekday - %ld", (long)[eventComponents weekday]);
 
-        
+        //today later or same day in this week than event
         if([nowComponents weekday]  >= [eventComponents weekday])
         {
-            if([nowComponents hour] >= [eventComponents hour])
+            //today is event day
+            if([nowComponents weekday] == [eventComponents weekday])
+            {
+                //today's time (hour) greater than or equal to event's time (hour)
+                if([nowComponents hour] >= [eventComponents hour])
+                {
+                    [eventComponents setWeek:([eventComponents week] + 1)];
+                }
+            }
+            else
             {
                 [eventComponents setWeek:([eventComponents week] + 1)];
             }
@@ -508,4 +636,5 @@
     
 
 }
+
 @end

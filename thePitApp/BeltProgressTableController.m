@@ -39,8 +39,14 @@
     [super viewDidLoad];
     
     //NSLog(_beltType);
+    /*
     self.navigationItem.title = _beltType;
-    
+    */
+    if(self.title != nil)
+    {
+    _beltType = self.title;
+    }
+    self.navigationItem.title = _beltType;
     if([_beltType isEqualToString:@"HKAdults"])
     {
         dataLink = [NSURL URLWithString:@"https://spreadsheets.google.com/feeds/list/0AsP6lrGC-fRldE43YWxHZGtwOHdiN0UwNU13OHRDRGc/od6/public/values"];
@@ -86,6 +92,12 @@
     // Return cell at specified indexPath, and sets textlabel to a name
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     cell.textLabel.text = [[feeds objectAtIndex:indexPath.row] objectForKey: @"gsx:name"];
+    
+    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:15.0];
+    cell.textLabel.numberOfLines = 0;
+    cell.textLabel.textColor = [UIColor whiteColor];
+    
     return cell;
 }
 

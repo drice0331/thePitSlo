@@ -24,4 +24,9 @@
 
 @property (nonatomic) UIViewContentMode contentMode;
 
+- (void)setWithClassName:(NSString*)classEventName andDayOfTheWeek:(NSUInteger)dayOfTheWeek
+            andStartHour:(NSUInteger)startHour andStartMinute:(NSUInteger)startMinute
+              andEndHour:(NSUInteger)endHour andEndMinute:(NSUInteger)endMinute
+            andFillColor:(UIColor*)fillColor;
+
 @end

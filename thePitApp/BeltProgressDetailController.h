@@ -12,6 +12,9 @@
 @interface BeltProgressDetailController : UIViewController
 @property (strong, nonatomic) NSArray *beltProgressDetailInfo;
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *beltColorLabel;
+@property (strong, nonatomic) IBOutlet UILabel *dayProgressLabel;
+
 @property (weak, nonatomic) IBOutlet BeltProgressImage *beltProgress;
 
 @end

@@ -73,6 +73,12 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     cell.textLabel.text = [[feeds objectAtIndex:indexPath.row] objectForKey: @"title"];
+
+    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:17.0];
+    cell.textLabel.numberOfLines = 0;
+    //cell.textLabel.text = title;
+  
     return cell;
 }
 

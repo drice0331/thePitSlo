@@ -18,6 +18,37 @@
 
 #pragma mark - end properties
 
+- (id)initWithClassName:(NSString*)classEventName andDayOfTheWeek:(NSUInteger)dayOfTheWeek
+           andStartHour:(NSUInteger)startHour andStartMinute:(NSUInteger)startMinute
+             andEndHour:(NSUInteger)endHour andEndMinute:(NSUInteger)endMinute
+           andFillColor:(UIColor*)fillColor
+{
+    //[super [self init]];
+    
+    [self setClassEventName:classEventName];
+    [self setStartHour:startHour];
+    [self setStartMinute:startMinute];
+    [self setEndHour:endHour];
+    [self setEndMinute:endMinute];
+    [self setDayOfTheWeek:dayOfTheWeek];
+    [self setFillColor:fillColor];
+    
+    return self;
+}
+
+- (void)setWithClassName:(NSString*)classEventName andDayOfTheWeek:(NSUInteger)dayOfTheWeek
+           andStartHour:(NSUInteger)startHour andStartMinute:(NSUInteger)startMinute
+             andEndHour:(NSUInteger)endHour andEndMinute:(NSUInteger)endMinute
+           andFillColor:(UIColor*)fillColor
+{
+    [self setClassEventName:classEventName];
+    [self setStartHour:startHour];
+    [self setStartMinute:startMinute];
+    [self setEndHour:endHour];
+    [self setEndMinute:endMinute];
+    [self setDayOfTheWeek:dayOfTheWeek];
+    [self setFillColor:fillColor];
+}
 
 - (void)setClassEventName:(NSString*)classEventName
 {
@@ -143,7 +174,7 @@
     //NSString *text = @"Lorem ipsum";
     [_classEventName drawInRect:rect withAttributes:dict];
     */
-[[UIColor blackColor] setStroke];
+[[UIColor whiteColor] setStroke];
 [roundedRect stroke];
 
 }

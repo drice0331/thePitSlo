@@ -10,4 +10,8 @@
 
 @interface ProgressViewController : UIViewController
 
+@property (strong, nonatomic) IBOutlet UIButton *hkAdultsButton;
+@property (strong, nonatomic) IBOutlet UIButton *hkKidsButton;
+@property (strong, nonatomic) IBOutlet UIButton *bjjButton;
+
 @end

@@ -30,10 +30,15 @@
     [super viewDidLoad];
     
     _nameLabel.text = [_beltProgressDetailInfo objectAtIndex: 0];
+    
     int progressValue = [[_beltProgressDetailInfo objectAtIndex:1] intValue];
     //NSLog(@"%lu", (unsigned long)_beltProgressDetailInfo.count);
     NSString *beltcolor = [_beltProgressDetailInfo objectAtIndex:2];
     NSString *groupName = [_beltProgressDetailInfo objectAtIndex:3];
+    
+    _beltColorLabel.text = beltcolor;
+    _dayProgressLabel.text = [_beltProgressDetailInfo objectAtIndex:1];
+    
     //NSString *beltcolor = @"Red";
     [beltProgress setProgressValue:progressValue];
     [beltProgress setColor:beltcolor];

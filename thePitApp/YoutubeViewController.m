@@ -87,9 +87,6 @@
 {
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath
@@ -104,7 +101,12 @@
     NSArray *thumbnails = [video valueForKeyPath:@"media$group.media$thumbnail"];
     NSString *thumbnailImage = [thumbnails[0] valueForKeyPath:@"url"];
     
+    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:15.0];
+    cell.textLabel.numberOfLines = 0;
+    cell.textLabel.textColor = [UIColor whiteColor];
     cell.textLabel.text = title;
+    
     NSURL *url = [[NSURL alloc] initWithString:thumbnailImage];
     NSData *imageData = [[NSData alloc] initWithContentsOfURL:url];
     cell.imageView.image = [UIImage imageWithData:imageData];
