@@ -30,9 +30,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     self.tableView.separatorColor = [UIColor clearColor];
-    self.tableView.backgroundColor = [UIColor colorWithWhite:0.8 alpha:1];
     
     NSURL *url = [[NSURL alloc] initWithString:@"http://gdata.youtube.com/feeds/api/users/UCIyJyNFVRJpce6wmYUNtMNw/uploads?alt=json"];
     NSData *data = [[NSData alloc] initWithContentsOfURL:url];
@@ -66,6 +65,19 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)checkForConnection
+{
+    
+    Reachability *internetReachability = [Reachability reachabilityWithHostName:@"www.youtube.com"];
+    NetworkStatus statusInternet = [internetReachability currentReachabilityStatus];
+    if(statusInternet != ReachableViaWWAN)
+    {
+        UIAlertView *noConnectionAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Can't connect. Please check Internet connection" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil , nil];
+        [noConnectionAlert show];
+    }
+    
 }
 
 #pragma mark - Table view data source

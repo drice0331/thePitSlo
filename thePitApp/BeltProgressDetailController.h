@@ -17,4 +17,7 @@
 
 @property (weak, nonatomic) IBOutlet BeltProgressImage *beltProgress;
 
+
+- (NSString*)getProgressString:(int)progressVal;
+
 @end

@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong) NSString* classEventName;
 @property (nonatomic, strong) UIColor* fillColor;
+@property (nonatomic, strong) UIColor* textColor;
 @property (nonatomic) NSUInteger dayOfTheWeek;
 @property (nonatomic) NSUInteger startHour;
 @property (nonatomic) NSUInteger endHour;

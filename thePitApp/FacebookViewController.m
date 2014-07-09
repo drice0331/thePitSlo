@@ -30,13 +30,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    activityIndicatorObject = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    activityIndicatorObject.center = CGPointMake(150, 150);
+    activityIndicatorObject = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    activityIndicatorObject.frame = CGRectMake(([UIScreen mainScreen].bounds.size.width)/2 - 15, ([UIScreen mainScreen].bounds.size.height)/2 - 15, 30, 30);
     [self.view addSubview:activityIndicatorObject];
     
-    [self loadFacebookWebViewPage];
+    self.fbwebview.delegate = self;
     
-	// Do any additional setup after loading the view.
+    //[_browserBar setHidden:true];
+    
+    [self loadFacebookWebViewPage];
 }
 
 - (void)didReceiveMemoryWarning
@@ -80,14 +82,25 @@
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {
-    [self updateBackButton];
-    NSLog(@"webviewstartloading");
+    UIApplication* app = [UIApplication sharedApplication];
+    app.networkActivityIndicatorVisible = YES;
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
-    [self updateBackButton];
-    NSLog(@"webviewfinishedloading");
+    UIApplication* app = [UIApplication sharedApplication];
+    app.networkActivityIndicatorVisible = NO;
 
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+    NSLog(@"failed loading");
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                    message:@"Can't connect. Please check your Internet connection"
+                                                   delegate:self
+                                          cancelButtonTitle:@"Ok"
+                                          otherButtonTitles:nil];
+    [alert show];
+    [activityIndicatorObject stopAnimating];
 }
 
 - (void)backWasClicked:(id)sender {
@@ -96,20 +109,17 @@
     }
 }
 
+
 - (IBAction)startAnimating:(id)sender
 
 {
-    
     [activityIndicatorObject startAnimating];
-    
 }
 
 - (IBAction)stopAnimating:(id)sender
 
 {
-    
     [activityIndicatorObject stopAnimating];
-    
 }
 
 @end

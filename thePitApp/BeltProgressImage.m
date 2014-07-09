@@ -98,8 +98,8 @@ NSDictionary *colors;// = [NSDictionary dictionaryWithObjects:keys forKeys:color
         colorImagePaths = [NSArray arrayWithObjects:@"white.jpg", @"blue.jpg", @"purple.jpg", @"brown.jpg", @"black.jpg", nil];
     }*/
     
-    keys = [NSArray arrayWithObjects:@"Blue", @"Red", nil];
-    colorImagePaths = [NSArray arrayWithObjects:@"blue.jpg", @"red.jpg", nil];
+    keys = [NSArray arrayWithObjects:@"White", @"Yellow", @"Orange", @"Purple", @"Blue", @"Green", @"Red", @"Brown", @"Black",  nil];
+    colorImagePaths = [NSArray arrayWithObjects:@"white.jpg", @"yellow.jpg", @"orange.jpg", @"purple.jpg", @"blue.jpg", @"green.jpg", @"red.jpg", @"brown.jpg", @"black.jpg", nil];
     
     colors = [NSDictionary dictionaryWithObjects:colorImagePaths forKeys:keys];
     

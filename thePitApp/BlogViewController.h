@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Reachability.h"
 
 @protocol BlogViewControllerDelegate;
 
-@interface BlogViewController : UITableViewController <NSXMLParserDelegate>
+@interface BlogViewController : UITableViewController <NSXMLParserDelegate, UIAlertViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *blogPostTable;
 
 

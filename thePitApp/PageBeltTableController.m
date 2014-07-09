@@ -1,15 +1,15 @@
 //
-//  BeltProgressTableController.m
+//  PageBeltTableController.m
 //  thePitApp
 //
-//  Created by David Rice on 1/26/14.
+//  Created by David Rice on 4/16/14.
 //  Copyright (c) 2014 David Rice. All rights reserved.
 //
 
-#import "BeltProgressTableController.h"
 #import "BeltProgressDetailController.h"
+#import "PageBeltTableController.h"
 
-@interface BeltProgressTableController ()
+@interface PageBeltTableController ()
 {
     NSXMLParser *parser;
     NSURL *dataLink;
@@ -23,7 +23,7 @@
 
 @end
 
-@implementation BeltProgressTableController
+@implementation PageBeltTableController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -38,14 +38,8 @@
 {
     [super viewDidLoad];
     
-    //NSLog(_beltType);
-    /*
-    self.navigationItem.title = _beltType;
-    */
-    if(self.title != nil)
-    {
-    _beltType = self.title;
-    }
+    
+    dataLink = [NSURL URLWithString:@"https://spreadsheets.google.com/feeds/list/0AsP6lrGC-fRldE43YWxHZGtwOHdiN0UwNU13OHRDRGc/od6/public/values"];
     self.navigationItem.title = _beltType;
     if([_beltType isEqualToString:@"Kempo Adults"])
     {
@@ -60,6 +54,8 @@
         dataLink = [NSURL URLWithString:@"https://spreadsheets.google.com/feeds/list/0AsP6lrGC-fRldEd4Wnp2ekxuS21XUlNFNkE2aTRSS2c/od6/public/values"];
     }
     
+   //NSLog(_beltType);
+    
     feeds = [[NSMutableArray alloc] init];
     parser = [[NSXMLParser alloc] initWithContentsOfURL:dataLink];
     [parser setDelegate:self];
@@ -71,6 +67,19 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)checkForConnection
+{
+    
+    Reachability *internetReachability = [Reachability reachabilityWithHostName:[dataLink absoluteString]];
+    NetworkStatus statusInternet = [internetReachability currentReachabilityStatus];
+    if(statusInternet != ReachableViaWWAN)
+    {
+        UIAlertView *noConnectionAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Can't connect. Please check Internet connection" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil , nil];
+        [noConnectionAlert show];
+    }
+    
 }
 
 #pragma mark - Table view data source
@@ -177,54 +186,54 @@
 }
 
 /*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a story board-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-
+ // Override to support conditional editing of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ // Return NO if you do not want the specified item to be editable.
+ return YES;
+ }
  */
 
+/*
+ // Override to support editing the table view.
+ - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ if (editingStyle == UITableViewCellEditingStyleDelete) {
+ // Delete the row from the data source
+ [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+ }
+ else if (editingStyle == UITableViewCellEditingStyleInsert) {
+ // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+ }
+ }
+ */
+
+/*
+ // Override to support rearranging the table view.
+ - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+ {
+ }
+ */
+
+/*
+ // Override to support conditional rearranging of the table vi
+ ew.
+ - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ // Return NO if you do not want the item to be re-orderable.
+ return YES;
+ }
+ */
+
+/*
+ #pragma mark - Navigation
+ 
+ // In a story board-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+ {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ 
+ */
 @end

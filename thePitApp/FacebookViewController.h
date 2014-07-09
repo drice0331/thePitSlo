@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FacebookViewController : UIViewController
+@interface FacebookViewController : UIViewController <UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *fbwebview;
 @property (nonatomic,retain) UIActivityIndicatorView *activityIndicatorObject;
+@property (strong, nonatomic) IBOutlet UIToolbar *browserBar;
 
 @end

@@ -37,7 +37,7 @@
     NSString *groupName = [_beltProgressDetailInfo objectAtIndex:3];
     
     _beltColorLabel.text = beltcolor;
-    _dayProgressLabel.text = [_beltProgressDetailInfo objectAtIndex:1];
+    _dayProgressLabel.text = [self getProgressString:progressValue];
     
     //NSString *beltcolor = @"Red";
     [beltProgress setProgressValue:progressValue];
@@ -49,6 +49,20 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (NSString*)getProgressString:(int)progressVal
+{
+    NSMutableString *progressString = [_beltProgressDetailInfo objectAtIndex:1];
+    if(progressVal == 1)
+    {
+        [progressString appendString:@" Day"];
+    }
+    else
+    {
+        [progressString appendString:@" Days"];
+    }
+    return progressString;
 }
 
 @end

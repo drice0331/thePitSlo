@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Reachability.h"
 
 
-
-@interface YoutubeViewController : UITableViewController
+@interface YoutubeViewController : UITableViewController <UIAlertViewDelegate>
 {
     
 }

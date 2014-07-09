@@ -12,5 +12,9 @@
 #import <CoreLocation/CoreLocation.h>
 
 @interface ContactViewController : UIViewController <MFMailComposeViewControllerDelegate, CLLocationManagerDelegate>
+@property (strong, nonatomic) IBOutlet MKMapView *mapView;
+@property (strong, nonatomic) IBOutlet UIButton *phoneNumber;
+@property (strong, nonatomic) IBOutlet UIButton *email;
+@property (strong, nonatomic) IBOutlet UIButton *address;
 
 @end

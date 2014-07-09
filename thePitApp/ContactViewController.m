@@ -9,7 +9,10 @@
 #import "ContactViewController.h"
 
 @interface ContactViewController ()
-
+{
+    double latitude;
+    double longitude;
+}
 @end
 
 @implementation ContactViewController
@@ -29,6 +32,48 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.mapView.delegate = self;
+    
+    [self adjustMapviewPlacement];
+    
+    //pit coordinates
+    latitude = 0;
+    longitude = 0;
+    
+    //position text in buttons
+    self.phoneNumber.titleLabel.textAlignment = NSTextAlignmentLeft;
+    self.email.titleLabel.textAlignment = NSTextAlignmentLeft;
+    self.address.titleLabel.textAlignment = NSTextAlignmentLeft;
+    //
+    
+    NSString *addressString = [NSString stringWithFormat:@"1285 Laurel Lane San Luis Obispo California 93401"];
+    NSString *esc_addr =  [addressString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *req = [NSString stringWithFormat:@"http://maps.google.com/maps/api/geocode/json?sensor=false&address=%@", esc_addr];
+    NSString *result = [NSString stringWithContentsOfURL:[NSURL URLWithString:req] encoding:NSUTF8StringEncoding error:NULL];
+    if (result) {
+        NSScanner *scanner = [NSScanner scannerWithString:result];
+        if ([scanner scanUpToString:@"\"lat\" :" intoString:nil] && [scanner scanString:@"\"lat\" :" intoString:nil]) {
+            [scanner scanDouble:&latitude];
+            if ([scanner scanUpToString:@"\"lng\" :" intoString:nil] && [scanner scanString:@"\"lng\" :" intoString:nil]) {
+                [scanner scanDouble:&longitude];
+            }
+        }
+    }
+    CLLocationCoordinate2D destination;
+    destination.latitude = latitude;
+    destination.longitude = longitude;
+    
+    MKCoordinateSpan theSpan = MKCoordinateSpanMake(0.003, 0.003);
+    MKCoordinateRegion region = MKCoordinateRegionMake(destination, theSpan);
+    
+    MKCoordinateRegion adjustedRegion = [_mapView regionThatFits:region];
+    
+    MKPointAnnotation *newAnnotation = [[MKPointAnnotation alloc] init];
+    newAnnotation.coordinate = destination;
+    newAnnotation.title = @"The Pit";
+    newAnnotation.subtitle = @"1285 Laurel Lane, San Luis Obispo, CA";
+    [_mapView addAnnotation:newAnnotation];
+    [_mapView setRegion: adjustedRegion animated: NO];
 	// Do any additional setup after loading the view.
 }
 
@@ -68,23 +113,7 @@
 
 - (IBAction)gpsToThePit:(id)sender
 {
-    //pit coordinates
-    double latitude = 0;
-    double longitude = 0;
-    
-    NSString *addressString = [NSString stringWithFormat:@"1285 Laurel Lane San Luis Obispo California 93401"];
-    NSString *esc_addr =  [addressString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSString *req = [NSString stringWithFormat:@"http://maps.google.com/maps/api/geocode/json?sensor=false&address=%@", esc_addr];
-    NSString *result = [NSString stringWithContentsOfURL:[NSURL URLWithString:req] encoding:NSUTF8StringEncoding error:NULL];
-    if (result) {
-        NSScanner *scanner = [NSScanner scannerWithString:result];
-        if ([scanner scanUpToString:@"\"lat\" :" intoString:nil] && [scanner scanString:@"\"lat\" :" intoString:nil]) {
-            [scanner scanDouble:&latitude];
-            if ([scanner scanUpToString:@"\"lng\" :" intoString:nil] && [scanner scanString:@"\"lng\" :" intoString:nil]) {
-                [scanner scanDouble:&longitude];
-            }
-        }
-    }
+
     CLLocationCoordinate2D destination;
     destination.latitude = latitude;
     destination.longitude = longitude;
@@ -126,6 +155,22 @@
             [mapURL appendFormat:@"&daddr=%f,%f", destination.latitude, destination.longitude];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[mapURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
         }
+}
+
+- (void)adjustMapviewPlacement
+{
+    CGSize iOSDeviceScreenSize = [[UIScreen mainScreen] bounds].size;
+    if (iOSDeviceScreenSize.height == 480)
+    {   // iPhone 3GS, 4, and 4S and iPod Touch 3rd and 4th generation: 3.5 inch screen (diagonally measured)
+        self.mapView.frame = CGRectMake(20, 290,280, 170);
+        
+    }
+    else if(iOSDeviceScreenSize.height == 568)
+    {
+        // iPhone 5 and iPod Touch 5th generation: 4 inch screen (diagonally measured)
+                self.mapView.frame = CGRectMake(20, 358, 280, 190);
+
+    }
 }
 
 @end

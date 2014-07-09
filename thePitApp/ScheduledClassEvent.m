@@ -21,7 +21,7 @@
 - (id)initWithClassName:(NSString*)classEventName andDayOfTheWeek:(NSUInteger)dayOfTheWeek
            andStartHour:(NSUInteger)startHour andStartMinute:(NSUInteger)startMinute
              andEndHour:(NSUInteger)endHour andEndMinute:(NSUInteger)endMinute
-           andFillColor:(UIColor*)fillColor
+           andFillColor:(UIColor*)fillColor andTextColor:(UIColor*)textColor
 {
     //[super [self init]];
     
@@ -39,7 +39,7 @@
 - (void)setWithClassName:(NSString*)classEventName andDayOfTheWeek:(NSUInteger)dayOfTheWeek
            andStartHour:(NSUInteger)startHour andStartMinute:(NSUInteger)startMinute
              andEndHour:(NSUInteger)endHour andEndMinute:(NSUInteger)endMinute
-           andFillColor:(UIColor*)fillColor
+            andFillColor:(UIColor*)fillColor
 {
     [self setClassEventName:classEventName];
     [self setStartHour:startHour];
@@ -122,12 +122,20 @@
     [self setNeedsDisplay];
 }
 
+/*
+
+- (void)setTextColor:(UIColor *)textColor
+{
+    _textColor = textColor;
+    [self setNeedsDisplay];
+}
+
 - (void)setClicked:(BOOL)clicked
 {
     _clicked = clicked;
     [self setNeedsDisplay];
 }
- 
+ */
 
 #define CORNER_RADIUS 0.0
 
@@ -138,6 +146,8 @@
     //NSAttributedString *text;
     UIBezierPath *roundedRect = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:CORNER_RADIUS];
     [roundedRect addClip];
+    
+    //fillcolor/background set
     if(_fillColor == NULL)
     {
         [[UIColor whiteColor] setFill];
@@ -147,6 +157,16 @@
         [_fillColor setFill];//[[UIColor whiteColor] setFill];
     }
     UIRectFill(self.bounds);
+    
+    //text color set
+    if(_textColor == NULL)
+    {
+        self.titleLabel.textColor = [UIColor blackColor];
+    }
+    else
+    {
+        self.titleLabel.textColor = _textColor;
+    }
     
     self.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -174,7 +194,9 @@
     //NSString *text = @"Lorem ipsum";
     [_classEventName drawInRect:rect withAttributes:dict];
     */
-[[UIColor whiteColor] setStroke];
+    
+//sets color of border of view frame
+[[UIColor blackColor] setStroke];
 [roundedRect stroke];
 
 }
@@ -187,6 +209,7 @@
     NSLog(@"tap");
 }
 */
+
 
 #pragma mark - Initialization
 

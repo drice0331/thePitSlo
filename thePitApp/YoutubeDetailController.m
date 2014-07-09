@@ -32,6 +32,15 @@
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
     
+    //get screen and nav bar bounds for spacing
+    CGRect screenBound = [[UIScreen mainScreen] bounds];
+    CGSize screenSize = screenBound.size;
+    CGFloat screenHeight = screenSize.height;
+    CGFloat navigationBarHeight = self.navigationController.navigationBar.frame.size.height;
+    CGFloat videoHeightOffset = (screenHeight - 280 - navigationBarHeight)/2;
+    
+    NSLog(@"screen height - %f , nav bar height - %f , videoHeightOffset - %f", screenHeight, navigationBarHeight, videoHeightOffset);
+    
     NSString *videoURL = self.url;
     NSString *videoHTML = [NSString stringWithFormat:@"\
                            <html><body>\
@@ -40,6 +49,12 @@
                            </body></html>", videoURL];
     
     UIWebView *webView = [[UIWebView alloc] initWithFrame: self.view.frame];
+    
+    webView.frame = CGRectOffset(webView.frame, 0, videoHeightOffset);
+    webView.opaque = NO;
+    webView.backgroundColor = [UIColor blackColor];
+    
+    
     [webView loadHTMLString: videoHTML baseURL: nil];
     [self.view addSubview: webView];
     
@@ -49,6 +64,8 @@
                                     target:self
                                     action:@selector(shareDocument:)];
     self.navigationItem.rightBarButtonItem = shareButton;
+    
+    
 }
 
 -(IBAction)shareDocument: (id)sender

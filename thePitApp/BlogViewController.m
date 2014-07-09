@@ -42,7 +42,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
 	// Do any additional setup after loading the view.
     feeds = [[NSMutableArray alloc] init];
     NSURL *url = [NSURL URLWithString:@"http://thepitslo.blogspot.com/feeds/posts/default?alt=rss"];
@@ -57,6 +57,19 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)checkForConnection
+{
+    
+    Reachability *internetReachability = [Reachability reachabilityWithHostName:@"http://thepitslo.blogspot.com/feeds/posts/default?alt=rss"];
+    NetworkStatus statusInternet = [internetReachability currentReachabilityStatus];
+    if(statusInternet != ReachableViaWWAN)
+    {
+        UIAlertView *noConnectionAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Can't connect. Please check Internet connection" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil , nil];
+            [noConnectionAlert show];
+    }
+    
 }
 
 #pragma mark - Table View

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BlogDetailViewController : UIViewController
+@interface BlogDetailViewController : UIViewController <UIWebViewDelegate>
 
 @property (copy, nonatomic) NSString *url;
 @property (strong, nonatomic) IBOutlet UIWebView *webView;
